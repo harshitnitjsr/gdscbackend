@@ -41,7 +41,7 @@ const registerController = async (req, res) => {
         year,
         team,
         teamType,
-        profilePhoto: image, // Use the filename provided by multer
+        // profilePhoto: image, // Use the filename provided by multer
         imageurl:result.secure_url,
         
       }).save();
