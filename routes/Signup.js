@@ -8,15 +8,17 @@ const bcrypt = require("bcrypt");
 // const dotenv = require("dotenv");
 require("dotenv").config();
 var transporter = nodemailer.createTransport({
-  // SMTP server details
-  host: 'smtp.gmail.com', // Update this with your SMTP server host
-  port: 587, // Port for TLS/STARTTLS
-  secure: true, // false for TLS - as a boolean not string - if true the connection will use TLS when connecting to server
-  auth: {
-   user: process.env.EMAIL_PRIMARY,
-  pass: process.env.EMAIL_PRIMARY_PASSWORD
-  },
-});
+          service: 'gmail',
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true,
+          socketTimeout: 30000,
+          logger: true,
+          auth: {
+            user: process.env.EMAIL_PRIMARY,
+            pass: process.env.EMAIL_PRIMARY_PASSWORD
+          }
+        });
 
 router.post("/signup", async (req, res) => {
   let { name, email, password } = req.body;
