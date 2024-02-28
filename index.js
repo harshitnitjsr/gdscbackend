@@ -7,6 +7,7 @@ const path = require("path");
 const Signup = require("./routes/Signup");
 const Login = require("./routes/Login");
 const AddEvent = require("./routes/Addevents")
+const AuthRoute=require("./routes/authRoute")
 const Displayevents = require("./routes/Displayevents")
 const Members = require("./routes/Displaymembers")
 const verifytoken = require("./routes/verifytoken");
@@ -43,16 +44,16 @@ connectDB();
 
 
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'userImages/')
-  },
-  filename: function (req, file, cb) {
-    cb(null,`${new Date().getTime()}_${file.originalname}`);
-  }
-})
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'userImages/')
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null,`${new Date().getTime()}_${file.originalname}`);
+//   }
+// })
 
-const upload = multer({ storage: storage })
+// const upload = multer({ storage: storage })
 
 
 
@@ -81,7 +82,7 @@ app.use(express.json());
 
 //app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
 // app.use("/api/user", require("./routes/authRoute"));
-app.use("/api/user",upload.single('profilePhoto'), require("./routes/authRoute"));
+app.use("/api/user", AuthRoute);
 app.use("/api/v1/", Signup);
 app.use("/api/v1/", Login);
 
