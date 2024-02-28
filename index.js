@@ -24,8 +24,9 @@ app.use(
 );
 // app.use('/userImages',express.static('userImages'))
 // app.use('/thumbnail',express.static('thumbnail'))
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(bodyParser.json())
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // app.use(express.static("public"))
 dotenv.config();
 // dotenv.config({ path: "./config/config.env" });
@@ -77,7 +78,9 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
+
 
 
 //app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
