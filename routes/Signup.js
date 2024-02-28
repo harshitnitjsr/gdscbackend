@@ -8,11 +8,15 @@ const bcrypt = require("bcrypt");
 // const dotenv = require("dotenv");
 require("dotenv").config();
 var transporter = nodemailer.createTransport({
-              service: "Gmail",
-              auth: {
-                      user: process.env.EMAIL_PRIMARY,
-                       pass: process.env.EMAIL_PRIMARY_PASSWORD
-                    }});
+  // SMTP server details
+  host: 'smtp.gmail.com', // Update this with your SMTP server host
+  port: 587, // Port for TLS/STARTTLS
+  secure: false, // false for TLS - as a boolean not string - if true the connection will use TLS when connecting to server
+  auth: {
+   user: process.env.EMAIL_PRIMARY,
+  pass: process.env.EMAIL_PRIMARY_PASSWORD
+  },
+});
 
 router.post("/signup", async (req, res) => {
   let { name, email, password } = req.body;
@@ -39,7 +43,7 @@ router.post("/signup", async (req, res) => {
       from: process.env.EMAIL_PRIMARY,
       to: process.env.EMAIL_SECONDARY,
       subject: 'Email Verification',
-      html: `Someone with the name :  ${name} and Email id : ${email} just registered on the GDSC Admin portal.<br> Click here http://localhost:3080/api/v1/verify/${verificationToken} to verify ${name}.`
+      html: `Someone with the name :  ${name} and Email id : ${email} just registered on the GDSC Admin portal.<br> Click here https://gdscbackend-alpha.vercel.app/api/v1/verify/${verificationToken} to verify ${name}.`
     };
     await transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
