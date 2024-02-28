@@ -11,7 +11,7 @@ var transporter = nodemailer.createTransport({
   // SMTP server details
   host: 'smtp.gmail.com', // Update this with your SMTP server host
   port: 587, // Port for TLS/STARTTLS
-  secure: false, // false for TLS - as a boolean not string - if true the connection will use TLS when connecting to server
+  secure: true, // false for TLS - as a boolean not string - if true the connection will use TLS when connecting to server
   auth: {
    user: process.env.EMAIL_PRIMARY,
   pass: process.env.EMAIL_PRIMARY_PASSWORD
