@@ -5,7 +5,7 @@ const Event = require("../models/Events")
 const cloudinary=require('../utils/cloudnary.js')
 router.post('/addevents', async (req, res) => {
     let { title,category,date,startTime,endTime,description,color,image } = req.body;
-    console.log(req.file,req.file.path,image)
+    
     //email = email.toLowerCase()
     try {
       const result=await cloudinary.uploader.upload(image,{

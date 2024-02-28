@@ -6,7 +6,7 @@ const multer = require("multer");
 const path = require("path");
 const Signup = require("./routes/Signup");
 const Login = require("./routes/Login");
-const Event = require("./routes/Addevents")
+const AddEvent = require("./routes/Addevents")
 const Displayevents = require("./routes/Displayevents")
 const Members = require("./routes/Displaymembers")
 const verifytoken = require("./routes/verifytoken");
@@ -60,16 +60,16 @@ const upload = multer({ storage: storage })
 
 
 
-const storage1 = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'thumbnail/')
-  },
-  filename: function (req, file, cb) {
-    cb(null,`${new Date().getTime()}_${file.originalname}`);
-  }
-})
+// const storage1 = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'thumbnail/')
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null,`${new Date().getTime()}_${file.originalname}`);
+//   }
+// })
 
-const upload1 = multer({ storage: storage1 })
+// const upload1 = multer({ storage: storage1 })
 
 
 app.get("/", (req, res) => {
@@ -88,7 +88,7 @@ app.use("/api/v1/", Login);
 app.use("/api/v1/",Displayevents );
 app.use("/api/v1/",Members );
 app.use("/api/v1/",verifytoken );
-app.use("/api/v1/", upload1.single('thumbnail'),Event);
+app.use("/api/v1/",AddEvent);
 
 
 // app.use("/api/search", tokenCheck, searchRouter);
