@@ -19,7 +19,7 @@ router.post('/addevents', async (req, res) => {
           startTime:startTime,
           endTime:endTime,
           description:description,
-          thumbnail: image, // Use the filename provided by multer
+          //thumbnail: image, // Use the filename provided by multer
           thumbnailurl:result.secure_url,
           color:color
         });
